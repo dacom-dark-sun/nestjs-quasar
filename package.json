@@ -1,0 +1,26 @@
+{
+  "name": "provider",
+  "private": true,
+  "dependencies": {
+    "backend": "workspace:*",
+    "eslint-plugin-vue-pug": "^0.6.2",
+    "frontend": "workspace:*",
+    "gh-pages": "^6.1.1",
+    "lerna": "^8.1.8",
+    "lint-staged": "^15.2.10"
+  },
+  "scripts": {
+    "dev": "lerna run dev --parallel",
+    "testnet": "git checkout testnet && git merge dev && lerna publish prerelease && git push && git checkout dev && git merge testnet",
+    "production": "git checkout main && git merge -X theirs testnet && lerna publish  --conventional-commits --conventional-graduate && git push && git checkout dev && git merge main",
+    "docs-publish": "pnpm gh-pages --nojekyll -d docs/site --repo git@github.com:<REPLACE REPO>.git"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "prettier": "^2.5.1"
+  }
+}
